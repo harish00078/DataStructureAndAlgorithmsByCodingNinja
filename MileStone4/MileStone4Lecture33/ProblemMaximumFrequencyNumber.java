@@ -21,7 +21,7 @@ public class ProblemMaximumFrequencyNumber {
         for(int i = 0; i < arr.length; i++){
             if(map.containsKey(arr[i])){ // if map contains the value of arr[i]:
                 // then we put that value again in the arr[i] and also increament arr[i] count with (+1): 
-                map.put(arr[i],map.get(arr[i] + 1)); 
+                map.put(arr[i],map.get(arr[i]) + 1); 
             }else{ // if that not the case:
                 // means: if that same value is not present in the arr[i]:
                 // then we simply put that value in the arr[i]:
@@ -33,9 +33,9 @@ public class ProblemMaximumFrequencyNumber {
         int ans = Integer.MIN_VALUE; // here we create other variable ans with initail value of MIN_VALUE:
         for(int i = 0; i <arr.length; i++){ // here we use for loop: for traversing through the array values:
             // here we are doing that:
-            if(map.get(i) > max){  // if map.get(i) value is greater then the max value:
-                max = map.get(i); // then we put the map.get(i) in the max varaible:
-                ans = i;  // and that (i) value will be equal to the ans variable :
+            if(map.get(arr[i]) > max){  // if map.get(i) value is greater then the max value:
+                max = map.get(arr[i]); // then we put the map.get(i) in the max varaible:
+                ans = arr[i];  // and that (i) value will be equal to the ans variable :
             }
         }
         return ans; // after we simply return that value:
@@ -44,7 +44,7 @@ public class ProblemMaximumFrequencyNumber {
     public static void main(String[] args) {
         
         /// this problem will work acc to its codezen main class:
-        int arr [] =  {1,2,3,3,3,3,5};
+        int arr [] =  {1,2,3,3,3,5};
         int ans = MaximumFrequencyNumber(arr);
         System.out.println(ans);
     }
