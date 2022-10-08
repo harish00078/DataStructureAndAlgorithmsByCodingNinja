@@ -46,7 +46,7 @@ public class ArrayIntersection {
         
         int arr1[] = {1,4,5,2,2,3,6,5,3,2};
         int arr2[] = {2,3,2,6,6,5,1};
-
-        printIntersection(arr1,arr2);
+        
+        printIntersection(arr1,arr2); 
     }
 }
