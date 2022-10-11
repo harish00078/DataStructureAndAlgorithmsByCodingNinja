@@ -2,7 +2,7 @@ package MileStone4.MileStone4Lecture33;
 
 import java.util.ArrayList;
 
-import MileStone2.MileStone2Lecture14.CountNumberOfDigits;
+
 
 
 
@@ -12,14 +12,14 @@ public class Map<K,V> {
     ArrayList<MapNode<K,V>> buckets;
 
     int count; //here we create a varaible (count) for having the count of the empty  buckets:
-    // or we can say that check the how much elements are present in the hashmap:
+    // or we can say that check the how much (elements/pairs) are present in the hashmap:
     int numBuckets; // here we are creating a another variable (numbuckets) for tracking the (null)   number sequence of the buckets:
 
     public Map(){ // here we are creating constructor:
         // for creating a MAP:
 
         buckets = new ArrayList<>(); // here we create buckets with ArrayList:
-        numBuckets = 20; // here we create the (20) number of    buckets:
+        numBuckets = 5; // here we create the (20) number of    buckets:
         // here we use forloop for putting (null) values  in that 20  numB uckets:
         for(int i = 0; i < numBuckets;i++){
             buckets.add(null);
@@ -36,6 +36,39 @@ public class Map<K,V> {
        int index = hc%numBuckets; // here we get our index using (modulo) function:
        return index; // and here we are returning our index:
     }
+
+    // here we create our rehashing function:
+    private void reHash(){
+
+        ArrayList<MapNode<K,V>> temp = buckets; // here we store all the previous bucket value in the (temp) Arraylist:        
+        buckets = new ArrayList<>(); // after that here we create new buckets for doubling its capacity:
+
+        for(int i =0; i < 2* numBuckets; i++){ // here we double the capacity of the (Buckets);
+            buckets.add(null); // and there initial value will we (null):
+        }
+        count = 0; // here we use (count = 0) so we can say that check the how much (elements/pairs)  are present in the hashmap:
+        numBuckets = numBuckets * 2; // here we double the capacity of our number of buckets:
+        for(int i = 0; i < temp.size(); i++){ // here we traversing through the each value of the temp arrayList( or we can say the old bucket values):
+
+            MapNode<K,V> head = temp.get(i); // after that here we have there head values of that old bucket values:
+            while(head != null){ // after that we have to check for the each linkedList that present in the old ArrayList:
+                // that we use while loop to util head does not get null:
+                K key = head.key; // here we are doing that: (key) will become head.key:
+                V value = head.value; //  here we are doing that: (values) will become head.value:
+                insert(key, value); //after that here we insert that all values in the insert function again after doubling the  capacity of the hashmap:
+                head = head.next; // and here we are doing the head will we equal to the head.next: util we did not insert each value:
+                // or we can say we use this for traversing through each value of the linkedlist:
+            }
+        }
+    }
+    //here we also create our own loadFactor function:
+    public double loadFactor(){
+        return (1.0*count)/numBuckets;
+    }
+
+
+
+
 
     // here we  are creating the (Insert) function for our own (hashmap)
     public void insert(K key, V value){
@@ -72,6 +105,13 @@ public class Map<K,V> {
         // for putting our new value in the Array:
         count++;
 
+        // here we are doing rehashing: In insert function:
+        // here we create loadfactor for using our created (rehashing) fucntion:
+        double loadFactor = (1.0*count)/numBuckets; // here we define the loadfactor in the Insert function:
+        if(loadFactor > 0.7){ // here we are doing that if(loadFactor) will become  greator than 0.7: 
+            reHash(); // then we have to use our own (reHash) funtion for maintaing the loadFactor of the Hashmap:
+        }
+
 
 
     }
@@ -103,6 +143,27 @@ public class Map<K,V> {
 
     }
     // here we are creating the (remove) function for our own hashmap:
+    public V removeKey(K key){
+        int bucketIndex = getBucketIndex(key);
+        MapNode<K,V> head = buckets.get(bucketIndex);
+        MapNode<K,V> prev = null;
+        while(head != null){
+            if(head.key.equals(key)){
+                if(prev != null){
+                    prev.next = head.next; /// here we remove the head value:
+                }else{
+                    buckets.set(bucketIndex, head.next);
+                }
+                count--;
+                return head.value;
+            }
+            prev = head;
+            head = head.next;
+        }
+        return null;
+
+
+    }
 
 
 
