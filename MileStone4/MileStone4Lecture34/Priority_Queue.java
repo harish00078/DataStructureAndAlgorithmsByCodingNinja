@@ -1,7 +1,7 @@
 package MileStone4.MileStone4Lecture34;
 
-import java.beans.PropertyVetoException;
 import java.util.ArrayList;
+
 
 
 // here we are creating our own priority_queue data structures:
@@ -74,10 +74,68 @@ public class Priority_Queue<T> {
     // here we create removeMin Function : for our own priority queue:
     public T removeMin() throws PriorityQueueException{
 
-        if(isEmpty()){
+        if(isEmpty()){ // here we are doing that: if priority Queue isEmpty:
 
-            throw new PriorityQueueException();
+            throw new PriorityQueueException(); //then we simply have to return the exception:
         }
+        // here in removed ELement we have the value of prioriyQueue's zeroth index:
+        Element<T> Removed = heap.get(0);
+        // and our ans Element will we equal to the removed value:
+        T ans = Removed.value;
+
+        // after that we did not have to swap the values:
+        // we are only have to set the last value of the heap at  the 0th index of the heap:
+        heap.set(0,heap.get(heap.size() -1 ));
+        // and after that we are removing the value at last index of the heap: using remove function:
+        heap.remove(heap.size() - 1);
+
+        // after put the last value at zeroth we have to maintain the (Min heap property):
+        // for that have to maintain our parent and child Elements acc to the Min heap property:
+        // for we need the  parentIndex and left or right child Index ELement values:
+        // so for that but we can do is that:
+        int parentIndex  = 0; // our initail parentIndex will we a zeroth Index:
+        int leftChildIndex = 2*parentIndex+1;// here we have our leftChildIndex: as we discuss in the code logic:
+        int rightChildIndex = 2*parentIndex+2;// here we have our rightChildIndex: as we disscuss in the code logic:
+
+        while(leftChildIndex < heap.size()){
+            // after getting  all the index: we have to check that which childIndex has a less value than its parentIndex:
+            // for that we have to maintain the minimumIndex:
+            int minimumIndex = parentIndex;// initaily our minimumIndex will we equal to the parentIndex:
+ 
+            // after we have to find that which childIndex have the less priority:
+            if(heap.get(leftChildIndex).Priority < heap.get(minimumIndex).Priority){// if leftChildIndex priority is less than the MinIndex priority or we can say its parenrtIndex priority:
+                minimumIndex = leftChildIndex; /// our minimumIndex will we equal to the leftchildIndex:
+            }
+            // after we aslo have to check for the rightChildIndex:
+            // or also have to gave the  creteria to the rightChildIndex:
+            // so while checking for the rightChildIndex: we did not get the (Exception):
+            if(rightChildIndex < heap.size() && (heap.get(rightChildIndex).Priority < heap.get(minimumIndex).Priority)){
+                minimumIndex = rightChildIndex;
+            }
+            // while swaping the values acc to Min heap property:
+            // we should have a case where before we reaching the lastIndex of the heap:
+            // we will get our perfect priority acc  the Min heap property:
+            // so for that we did not have to check further Elements:
+            if(minimumIndex == parentIndex){
+                break; // so here have to break our loop:
+            }
+            // after finding the minimum amoung in betweem the left or right index:
+            // we swap that minimum value with parentIndex:
+            Element<T> temp = heap.get(minimumIndex); // here we store our MiniIndex value in the Temp element:
+            // so we can change our MinimumIndex value or we can say our parentIndex value:
+            // by using the which of the left or right Child index value is minimum:
+            heap.set(minimumIndex, heap.get(parentIndex));// here we set our minimumIndex value at parentIndex value:
+            heap.set(parentIndex, temp); // and parentIndex will we equal to the temp Element value:
+            // after swaping the value: we also had to check  the other priorityqueue values for mainting the (Min heap priority) property
+            parentIndex = minimumIndex;
+            leftChildIndex = 2*parentIndex+1;
+            rightChildIndex = 2*parentIndex+2;
+        }
+        return ans;
+
+
+
+
 
     }
 
