@@ -28,18 +28,95 @@ public class Trie {
         root = new TrieNode('\0');// with (Root) node: and its value will we zero:
     }
 
+
+    // here we create helper function for adding words in the Trie:
+    // because we did not simple add the words in the Trie:
+    // while creating simple (add) fucntion:
+    // because we also have to define there node:
+    // so we can enter all other subwords related to that complete word in the correct way:
+    // and without relocating the root that is not possible: that why be create helper function:
+
+
+    private void addHelper(TrieNode root, String word){
+
+        // here we have our base case:
+        if(word.length() == 0){ //if words length get empty: means we add the complete word in the Trie:
+            // then that last node will become our isTerminalNode:
+            root.isTerminal = true;
+            return;//and return that;
+        }
+
+        // here we are defining the childIndex:
+        // so we can enter the charcters in correct way:
+        int childIndex = word.charAt(0) - 'A';
+
+        // here we are defining the childNode:
+        // root's children Array Index value means (childIndex)  is our  childNode of Trie:
+        TrieNode child = root.children[childIndex];
+        // if childNode is not present:
+        if(child == null){ // here we are checking that if childNode is null or not present:
+            child = new TrieNode(word.charAt(0)); // then we have to create new childNode:
+            // and add  that childNode into the childIndex:
+            root.children[childIndex] = child;
+        }
+        // here we use recursion: for entering other substrings related to the complete word:
+        addHelper(child, word.substring(1));
+
+    }
+
     // under Trie we have (add) function: that we use to add words in the (Trie):
     public void add(String word){
+
+        addHelper(root, word);
 
     }
     // under Trie we have(search)function: that we use to search words in the (Trie):
     public boolean search(String word){
+
+        return searchHelper(root,word);
+
+    }
+    // here we create search Helper function: for the same reason like addHelper function:
+    private boolean searchHelper(TrieNode root, String word){
+
+        // base case:
+        if(word.length() == 0){
+            return root.isTerminal;
+        }
+        int childIndex = word.codePointAt(0) -'A';
+        TrieNode child = root.children[childIndex];
+        // if there does not exit any word:
+        if(child == null){
+            return false; // then we simply return false:
+        }
+        // here if word exist: then we use recusrion for searching its other subwords related to that complete word:
+        return searchHelper(child, word.substring(1));
 
     }
 
     // uder Trie we have (Remove) function: that we use to Remove words in the (Trie):
     public void Remove(String word){
 
+        RemoveHelper(root,word);
     }
+
+    // here we create remove Helper function: for the same reason like addHelper function:
+    public void RemoveHelper(TrieNode root, String word){
+
+        // base case:
+        if(word.length() ==0){
+            root.isTerminal = false;
+            return;
+        }
+
+        int childIndex = word.charAt(0) - 'A';
+        TrieNode child = root.children[childIndex];
+        if(child == null){ // here if childNode check null:
+            return; // we did not have to return anything:
+        }
+
+        RemoveHelper(child, word.substring(1));
+    }
+
     
 }
