@@ -9,7 +9,9 @@ public class TrieUse {
         t.add("NOTE");
         t.add("AND");
 
-        System.out.println(t.search("NOTE"));
+        System.out.println(t.search("AND"));
+        t.Remove("AND");
+        System.out.println(t.search("AND"));
     }
     
 }

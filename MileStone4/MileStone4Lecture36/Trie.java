@@ -6,6 +6,7 @@ class TrieNode{
     char data; // data of characters:
     boolean isTerminal; // we aslo have TerminalNode: that repersent the end of the particular String or we can say a particular word:
     TrieNode children[]; // we have childrenNode: because every Node will have a 26 childrenNodes in it:
+    int childCount; // using variable we can track  our Node count:
 
     // here we are creating the TrieNode through constructor:
     public TrieNode(char data){ // here have our data:
@@ -14,6 +15,9 @@ class TrieNode{
         this.isTerminal = false;
         // under childrenNode every Node is null by default:
         this.children = new TrieNode[26];
+        // here we create varainble in the TrieNode: we getting count on our Nodes:
+        this.childCount = 0;
+        
     }
 }
 
@@ -58,6 +62,8 @@ public class Trie {
             child = new TrieNode(word.charAt(0)); // then we have to create new childNode:
             // and add  that childNode into the childIndex:
             root.children[childIndex] = child;
+            // here we use childCount variable:for getting count of our Nodes:
+            root.childCount++;
         }
         // here we use recursion: for entering other substrings related to the complete word:
         addHelper(child, word.substring(1));
@@ -115,7 +121,20 @@ public class Trie {
             return; // we did not have to return anything:
         }
 
+        // if the word is present:
+        // then we use recurison for removing all the other subwords of the complete word:
         RemoveHelper(child, word.substring(1));
+
+        // after all these we also have to remove all the un-neccesary Nodes:
+        // and also those nodes which does not have a terminalNode:
+        if(!child.isTerminal && child.childCount == 0){ // if any Nodes does not have a terminal Node or its  childNodes count  are zero:
+
+            // then we simply have to remove that childINdex: putting null on that childIndex:
+            root.children[childIndex] =null;
+            // and also havve to minimize the childCount:
+            root.childCount--;
+        }
+         
     }
 
     
