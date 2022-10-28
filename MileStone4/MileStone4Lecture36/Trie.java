@@ -129,7 +129,7 @@ public class Trie {
         // and also those nodes which does not have a terminalNode:
         if(!child.isTerminal && child.childCount == 0){ // if any Nodes does not have a terminal Node or its  childNodes count  are zero:
 
-            // then we simply have to remove that childINdex: putting null on that childIndex:
+            // then we simply have to remove that childINdex: putting null on that childIndex
             root.children[childIndex] =null;
             // and also havve to minimize the childCount:
             root.childCount--;
