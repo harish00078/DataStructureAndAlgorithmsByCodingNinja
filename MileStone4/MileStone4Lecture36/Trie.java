@@ -110,7 +110,7 @@ public class Trie {
     public void RemoveHelper(TrieNode root, String word){
 
         // base case:
-        if(word.length() ==0){
+        if(word.length() ==0){ 
             root.isTerminal = false;
             return;
         }
