@@ -401,6 +401,7 @@ public class BinaryTreeUse {
     }
 
 
+    // problem: isNodePresent:
     public static boolean isNodePresent(CreateBinaryTreeNode<Integer> root, int x) {
 	    if (root == null){ // here we firstly check if root is null:
             return false; // then we simply return false
