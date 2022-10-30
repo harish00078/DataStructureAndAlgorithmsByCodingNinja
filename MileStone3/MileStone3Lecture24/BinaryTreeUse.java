@@ -1,9 +1,7 @@
 package MileStone3.MileStone3Lecture24;
 
-import java.lang.Thread.State;
 import java.util.Scanner;
 
-import MileStone2.AssignmentProblemOfRecursion.Staircase;
 
 // here we are using the binary Tree class that we are created:
 public class BinaryTreeUse {
