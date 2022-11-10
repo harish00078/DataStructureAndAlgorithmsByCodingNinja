@@ -23,6 +23,7 @@ public class Huffman {
  
             // c is the character in the node
             System.out.println(root.c + ":" + s);
+            
  
             return;
         }
