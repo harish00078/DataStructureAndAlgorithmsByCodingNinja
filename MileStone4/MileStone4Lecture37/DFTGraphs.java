@@ -2,7 +2,7 @@ package MileStone4.MileStone4Lecture37;
 
 import java.util.Scanner;
 
-public class Graphs {
+public class DFTGraphs {
 
     // here we are implementing a graph through (depth first traversal) method:
 
