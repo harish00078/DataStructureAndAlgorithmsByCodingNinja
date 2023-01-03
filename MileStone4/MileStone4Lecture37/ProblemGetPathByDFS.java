@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class GetPathByDFS {
+public class ProblemGetPathByDFS {
 
   // here we haave main file for the problen:
   public static void main(String[] args) throws NumberFormatException, IOException {
