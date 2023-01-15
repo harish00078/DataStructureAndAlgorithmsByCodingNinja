@@ -3,6 +3,9 @@ package MileStone4.MileStone4Lecture38;
 import java.util.Arrays;
 import java.util.Scanner;
 
+
+
+
 // here we create class (Edge): from were we get our (edges):
 
 // IMP = and we also have to sort the (edges) in asscending-order: acc to our code logic:
@@ -30,10 +33,20 @@ class Edge implements Comparable<Edge> {
   }
 }
 
+
+
+
+
+
+
 // here we create a kruskal's algorithm class:
-// were we write the (kruskal's algorithm) and also write the (main-file) or we can say (input) file  in it:
+
+// were we write the (kruskal's algorithm) and also write the (main-file) or we can say (input) file in it:
+// and also write the (find-parent) function for the (vertices):
 
 public class KruskalsAlgorithm {
+
+
 
 
   // here we are creating a (find-parent) function:
@@ -52,6 +65,8 @@ public class KruskalsAlgorithm {
     // here we are using the (recursion): for finding our (parent) value:
     return findParent(parent[v], parent);
   }
+
+
 
 
 
@@ -113,6 +128,10 @@ public class KruskalsAlgorithm {
 
     return mst;
   }
+
+
+
+
 
 
 
