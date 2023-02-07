@@ -24,7 +24,6 @@ public class PrimsAlgorithm {
   /// here we have our prim's algorithm:
   public static void prims(int adjMatrix[][]) {
     int n = adjMatrix.length;
-
     boolean visited[] = new boolean[n];
 
     int parent[] = new int[n];
