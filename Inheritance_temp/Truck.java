@@ -6,6 +6,8 @@ package Inheritance_temp;
 
 //     int maxLoadingCapacity;
 
+
+
 //     public void print(){
 //         System.out.println("vehicle " + "color " + getColor() + " maxspeed " + maxspeed + "maxLoadingCapacity " + maxLoadingCapacity);
 //     }
